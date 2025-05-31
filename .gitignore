@@ -1,0 +1,9 @@
+# depencencies
+node_modules
+
+# compiled
+dist
+build
+
+# OS
+.DS_Store
