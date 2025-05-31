@@ -1,10 +1,19 @@
+import { stringifyQuery } from "@/utils/query";
 import { IRecipe, IRecipeInfo } from "./types";
 
 const { API_DOMAIN } = process.env;
 
-export async function getRecipes(): Promise<IRecipe[]> {
-  // TODO: add filter options
-  const res = await fetch(`${API_DOMAIN}/recipes`);
+type IGetRecipesFilters = {
+  area: string;
+  category: string;
+  ingredient: string;
+};
+
+export async function getRecipes(
+  filters: IGetRecipesFilters
+): Promise<IRecipe[]> {
+  const query = stringifyQuery(filters);
+  const res = await fetch(`${API_DOMAIN}/recipes?${query}`);
   const json = await res.json();
 
   if (!res.ok) {
