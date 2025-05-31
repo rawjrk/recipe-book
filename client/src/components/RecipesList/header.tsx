@@ -16,7 +16,8 @@ export default async function RecipesHeader({
 
   return (
     <div>
-      Displaying recipes filtered by {currentFilter.key} "{currentFilter.val}"
+      Displaying recipes filtered by {currentFilter.key} &quot;
+      {currentFilter.val}&quot;
     </div>
   );
 }
