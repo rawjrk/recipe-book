@@ -5,6 +5,7 @@ type IFilterSelectProps = {
   options: string[];
   selected?: string;
   onChange: (value: string) => void;
+  disabled?: boolean;
 };
 
 export default function FilterSelect({
@@ -12,12 +13,17 @@ export default function FilterSelect({
   options,
   selected,
   onChange,
+  disabled,
 }: IFilterSelectProps) {
+  const bgColor = !disabled ? "bg-black" : "bg-gray-800";
+  const textColor = !disabled ? "text-white" : "text-gray-400";
+
   return (
     <select
       defaultValue={selected}
       onChange={(e) => onChange(e.target.value)}
-      className="bg-black w-full p-2 border rounded"
+      disabled={disabled}
+      className={`${bgColor} w-full p-2 border rounded ${textColor}`}
     >
       <option value="">{defaultTitle}</option>
       {options.map((opt) => (
