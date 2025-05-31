@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { stringifyQuery } from 'src/utils/query';
+import { IIngredient, IRecipe, IRecipeInfo } from './recipes.types';
 
 type IFilterOptions = {};
 
@@ -42,5 +43,45 @@ export class RecipesService {
     }
 
     return json.meals.at(0);
+  }
+
+  formatMany(rawRecipes: any[]): IRecipe[] {
+    // TODO: add proper typing
+
+    return rawRecipes.map((r) => ({
+      id: r.idMeal,
+      title: r.strMeal,
+      thumbnail: r.strMealThumb,
+      category: r.strCategory,
+      area: r.strArea,
+      instructions: r.strInstructions,
+      ingredients: this.formatIngredients(r),
+    }));
+  }
+
+  formatOne(rawRecipe: any): IRecipeInfo {
+    // TODO: add proper typing
+
+    const [recipeInfo] = this.formatMany([rawRecipe]);
+    return recipeInfo;
+  }
+
+  formatIngredients(rawRecipe: any): IIngredient[] {
+    // TODO: add proper typing
+
+    const ingredients: IIngredient[] = [];
+
+    for (let i = 1; i <= 20; i++) {
+      const name = rawRecipe[`strIngredient${i}`];
+      const measure = rawRecipe[`strMeasure${i}`];
+
+      if (!name) {
+        break;
+      }
+
+      ingredients.push({ name, measure });
+    }
+
+    return ingredients;
   }
 }
