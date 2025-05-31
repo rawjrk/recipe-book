@@ -58,18 +58,21 @@ export class RecipesService {
       id: r.idMeal,
       title: r.strMeal,
       thumbnail: r.strMealThumb,
-      category: r.strCategory,
-      area: r.strArea,
-      instructions: r.strInstructions,
-      ingredients: this.formatIngredients(r),
     }));
   }
 
   formatOne(rawRecipe: any): IRecipeInfo {
     // TODO: add proper typing
 
-    const [recipeInfo] = this.formatMany([rawRecipe]);
-    return recipeInfo;
+    return {
+      id: rawRecipe.idMeal,
+      title: rawRecipe.strMeal,
+      thumbnail: rawRecipe.strMealThumb,
+      category: rawRecipe.strCategory,
+      area: rawRecipe.strArea,
+      instructions: rawRecipe.strInstructions,
+      ingredients: this.formatIngredients(rawRecipe),
+    };
   }
 
   formatIngredients(rawRecipe: any): IIngredient[] {
