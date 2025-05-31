@@ -1,10 +1,19 @@
 "use server";
 
+import { SearchParams } from "nuqs";
 import { getRecipes } from "@/api/recipes";
+import { getAreas, getCategories, getIngredients } from "@/api/listing";
+import RecipeFilters from "@/components/RecipeFilters";
 import RecipesList from "@/components/RecipesList";
+import { loadSearchParams } from "./searchParams";
 
-export default async function RecipesPage() {
-  const recipes = await getRecipes().catch(() => null);
+type IRecipesPageProps = {
+  searchParams: Promise<SearchParams>;
+};
+
+export default async function RecipesPage({ searchParams }: IRecipesPageProps) {
+  const filters = await loadSearchParams(searchParams);
+  const recipes = await getRecipes(filters).catch(() => null);
 
   const areas = await getAreas().catch(() => []);
   const categories = await getCategories().catch(() => []);
