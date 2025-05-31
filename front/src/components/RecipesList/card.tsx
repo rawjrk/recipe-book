@@ -12,11 +12,11 @@ export default function RecipeCard({ data: recipe }: IRecipeCardProps) {
   }, [recipe.id]);
 
   return (
-    <div className="max-w-lg bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <Link href={infoHref}>
         <img
           className="rounded-t-lg"
-          src={recipe.thumbnail}
+          src={`${recipe.thumbnail}/medium`}
           alt={recipe.title}
         />
       </Link>
