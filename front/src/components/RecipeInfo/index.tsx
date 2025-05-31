@@ -1,5 +1,6 @@
 import React from "react";
 import { IRecipeInfo } from "@/api/types";
+import Link from "next/link";
 
 type IRecipeInfoProps = {
   data: IRecipeInfo;
@@ -17,8 +18,15 @@ export default function RecipeInfo({ data: recipe }: IRecipeInfoProps) {
       />
       <h2 className="text-2xl font-bold mb-2">{recipe.title}</h2>
       <div className="text-sm text-gray-400 mb-4">
-        <span className="mr-4">Category: {recipe.category}</span>
-        <span>Region: {recipe.area}</span>
+        <span className="mr-4">
+          Category:{" "}
+          <Link href={`/recipes?category=${recipe.category}`}>
+            {recipe.category}
+          </Link>
+        </span>
+        <span>
+          Area: <Link href={`/recipes?area=${recipe.area}`}>{recipe.area}</Link>
+        </span>
       </div>
       <h3 className="text-lg font-semibold mb-2">Ingredients</h3>
       <ul className="list-disc list-inside mb-4">
