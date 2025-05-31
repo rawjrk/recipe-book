@@ -1,3 +1,5 @@
+import { ApiError } from "./utils/error";
+
 const { API_DOMAIN } = process.env;
 
 export async function getCategories(): Promise<string[]> {

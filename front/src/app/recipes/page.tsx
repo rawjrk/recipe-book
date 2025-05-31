@@ -2,11 +2,11 @@
 
 import { revalidateTag } from "next/cache";
 import { SearchParams } from "nuqs";
-import { getRecipes } from "@/api/recipes";
 import { getAreas, getCategories, getIngredients } from "@/api/listing";
 import RecipeFilters from "@/components/RecipeFilters";
 import RecipesList from "@/components/RecipesList";
 import { loadSearchParams } from "./searchParams";
+import { Suspense } from "react";
 
 type IRecipesPageProps = {
   searchParams: Promise<SearchParams>;
@@ -14,7 +14,6 @@ type IRecipesPageProps = {
 
 export default async function RecipesPage({ searchParams }: IRecipesPageProps) {
   const filters = await loadSearchParams(searchParams);
-  const recipes = await getRecipes(filters).catch(() => null);
 
   const areas = await getAreas().catch(() => []);
   const categories = await getCategories().catch(() => []);
@@ -22,7 +21,7 @@ export default async function RecipesPage({ searchParams }: IRecipesPageProps) {
 
   async function refetchRecipes() {
     "use server";
-    revalidateTag("");
+    revalidateTag("recipes");
   }
 
   return (
@@ -33,7 +32,9 @@ export default async function RecipesPage({ searchParams }: IRecipesPageProps) {
         ingredients={ingredients}
         refetchRecipes={refetchRecipes}
       />
-      <RecipesList data={recipes} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <RecipesList {...filters} />
+      </Suspense>
     </main>
   );
 }

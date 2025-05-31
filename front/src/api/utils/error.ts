@@ -1,4 +1,4 @@
-class ApiError {
+export class ApiError {
   statusCode: number;
   message: string;
 

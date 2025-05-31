@@ -1,4 +1,5 @@
 import { stringifyQuery } from "@/utils/query";
+import { ApiError } from "./utils/error";
 import { IRecipe, IRecipeInfo } from "./types";
 
 const { API_DOMAIN } = process.env;

@@ -1,6 +1,7 @@
 import React from "react";
 import { IRecipeInfo } from "@/api/types";
 import Link from "next/link";
+import Image from "next/image";
 
 type IRecipeInfoProps = {
   data: IRecipeInfo;
@@ -9,7 +10,7 @@ type IRecipeInfoProps = {
 export default function RecipeInfo({ data: recipe }: IRecipeInfoProps) {
   return (
     <div className="rounded-lg shadow-md p-6 max-w-3xl mx-auto">
-      <img
+      <Image
         src={recipe.thumbnail}
         alt={recipe.title}
         width={600}

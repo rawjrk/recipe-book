@@ -1,11 +1,22 @@
-import { IRecipe } from "@/api/types";
+"use server";
+
 import RecipeCard from "./card";
+import { getRecipes } from "@/api/recipes";
 
 type IRecipesListProps = {
-  data: IRecipe[] | null;
+  area: string;
+  category: string;
+  ingredient: string;
 };
 
-export default function RecipesList({ data: recipes }: IRecipesListProps) {
+export default async function RecipesList({
+  area,
+  category,
+  ingredient,
+}: IRecipesListProps) {
+  const filters = { area, category, ingredient };
+  const recipes = await getRecipes(filters).catch(() => null);
+
   if (!recipes) {
     return null;
   }
