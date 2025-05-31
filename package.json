@@ -1,0 +1,9 @@
+{
+  "name": "recipe-book",
+  "type": "commonjs",
+  "scripts": {
+    "setup": "cd ./server && echo -- Server Repo -- && yarn && cd ../client && echo -- Client Repo -- && yarn",
+    "server": "cd server && yarn start:dev",
+    "client": "cd client && yarn dev"
+  }
+}
