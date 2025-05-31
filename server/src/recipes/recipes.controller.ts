@@ -19,4 +19,15 @@ export class RecipesController {
     const rawRecipes = await this.recipesService.fetchMany();
     return this.recipesService.formatMany(rawRecipes);
   }
+
+  @Get('recipe/:id')
+  async getRecipeDetails(@Param('id', ParseIntPipe) id: number) {
+    const rawRecipe = await this.recipesService.fetchOne(id);
+
+    if (!rawRecipe) {
+      throw new NotFoundException();
+    }
+
+    return this.recipesService.formatOne(rawRecipe);
+  }
 }
