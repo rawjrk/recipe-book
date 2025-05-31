@@ -34,7 +34,7 @@ export class RecipesService {
     const res = await fetch(url);
     const json = await res.json(); // TODO: add proper typing
 
-    return json.meals;
+    return json?.meals ?? [];
   }
 
   async fetchOne(recipeId: number) {
