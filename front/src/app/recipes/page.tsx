@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { SearchParams } from "nuqs";
 import { getRecipes } from "@/api/recipes";
 import { getAreas, getCategories, getIngredients } from "@/api/listing";
@@ -19,12 +20,18 @@ export default async function RecipesPage({ searchParams }: IRecipesPageProps) {
   const categories = await getCategories().catch(() => []);
   const ingredients = await getIngredients().catch(() => []);
 
+  async function refetchRecipes() {
+    "use server";
+    revalidateTag("");
+  }
+
   return (
     <main>
       <RecipeFilters
         categories={categories}
         areas={areas}
         ingredients={ingredients}
+        refetchRecipes={refetchRecipes}
       />
       <RecipesList data={recipes} />
     </main>

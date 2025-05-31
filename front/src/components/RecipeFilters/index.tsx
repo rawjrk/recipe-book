@@ -7,24 +7,41 @@ type RecipeFiltersProps = {
   categories: string[];
   areas: string[];
   ingredients: string[];
+  refetchRecipes: () => void;
 };
 
 export default function RecipeFilters({
   categories,
   areas,
   ingredients,
+  refetchRecipes,
 }: RecipeFiltersProps) {
   const [area, setArea] = useQueryState("area", {
     defaultValue: "",
   });
 
+  const handleAreaChange = (value: string) => {
+    setArea(value);
+    refetchRecipes();
+  };
+
   const [category, setCategory] = useQueryState("category", {
     defaultValue: "",
   });
 
+  const handleCategoryChange = (value: string) => {
+    setCategory(value);
+    refetchRecipes();
+  };
+
   const [ingredient, setIngredient] = useQueryState("ingredient", {
     defaultValue: "",
   });
+
+  const handleIngredientChange = (value: string) => {
+    setIngredient(value);
+    refetchRecipes();
+  };
 
   return (
     <div className="m-4 flex flex-col lg:flex-row gap-4">
@@ -32,21 +49,21 @@ export default function RecipeFilters({
         defaultTitle="All categories"
         options={categories}
         selected={category}
-        onChange={(value) => setCategory(value)}
+        onChange={(value) => handleCategoryChange(value)}
       />
 
       <FilterSelect
         defaultTitle="All areas"
         options={areas}
         selected={area}
-        onChange={(value) => setArea(value)}
+        onChange={(value) => handleAreaChange(value)}
       />
 
       <FilterSelect
         defaultTitle="All ingredients"
         options={ingredients}
         selected={ingredient}
-        onChange={(value) => setIngredient(value)}
+        onChange={(value) => handleIngredientChange(value)}
       />
     </div>
   );
