@@ -32,7 +32,7 @@ export default async function RecipesPage({ searchParams }: IRecipesPageProps) {
         ingredients={ingredients}
         refetchRecipes={refetchRecipes}
       />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div className="m-4">Loading...</div>}>
         <RecipesList {...filters} />
       </Suspense>
     </main>
