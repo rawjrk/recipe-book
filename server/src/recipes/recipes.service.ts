@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { stringifyQuery } from 'src/utils/query';
 import { IIngredient, IRecipe, IRecipeInfo } from './recipes.types';
-
-type IFilterOptions = {};
+import { GetRecipesQueryDto } from './dto/get-recipes.dto';
 
 @Injectable()
 export class RecipesService {
@@ -19,11 +18,18 @@ export class RecipesService {
     this.baseUrl = recipeApiBaseUrl;
   }
 
-  async fetchMany(options?: IFilterOptions) {
-    // TODO: add options handling to apply filters
+  async fetchMany(options: GetRecipesQueryDto) {
+    const { area, category, ingredient } = options;
 
-    const query = stringifyQuery({ s: '' }) || 's=';
-    const url = `${this.baseUrl}/search.php?${query}`;
+    const query = stringifyQuery({
+      a: area || '',
+      c: category || '',
+      i: ingredient || '',
+    });
+
+    const url = !!query
+      ? `${this.baseUrl}/filter.php?${query}`
+      : `${this.baseUrl}/search.php?s=`;
 
     const res = await fetch(url);
     const json = await res.json(); // TODO: add proper typing

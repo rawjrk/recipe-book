@@ -15,7 +15,7 @@ export class RecipesController {
 
   @Get('recipes')
   async getRecipesList(@Query() query: GetRecipesQueryDto) {
-    const rawRecipes = await this.recipesService.fetchMany();
+    const rawRecipes = await this.recipesService.fetchMany(query);
     return this.recipesService.formatMany(rawRecipes);
   }
 
