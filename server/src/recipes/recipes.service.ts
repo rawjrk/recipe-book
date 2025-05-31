@@ -27,7 +27,7 @@ export class RecipesService {
       i: ingredient || '',
     });
 
-    const url = !!query
+    const url = query
       ? `${this.baseUrl}/filter.php?${query}`
       : `${this.baseUrl}/search.php?s=`;
 
