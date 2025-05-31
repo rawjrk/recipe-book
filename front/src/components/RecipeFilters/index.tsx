@@ -56,6 +56,7 @@ export default function RecipeFilters({
         options={categories}
         selected={category}
         onChange={(value) => handleCategoryChange(value)}
+        disabled={Boolean(area || ingredient)}
       />
 
       <FilterSelect
@@ -63,6 +64,7 @@ export default function RecipeFilters({
         options={areas}
         selected={area}
         onChange={(value) => handleAreaChange(value)}
+        disabled={Boolean(category || ingredient)}
       />
 
       <FilterSelect
@@ -70,6 +72,7 @@ export default function RecipeFilters({
         options={ingredients}
         selected={ingredient}
         onChange={(value) => handleIngredientChange(value)}
+        disabled={Boolean(area || category)}
       />
     </div>
   );
