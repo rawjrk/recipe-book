@@ -1,8 +1,15 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 import { RecipesModule } from './recipes/recipes.module';
 
 @Module({
-  imports: [RecipesModule],
+  imports: [
+    ConfigModule.forRoot({
+      load: [configuration],
+    }),
+    RecipesModule,
+  ],
   controllers: [],
   providers: [],
 })
