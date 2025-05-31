@@ -22,7 +22,9 @@ export default function RecipeFilters({
 
   const handleAreaChange = (value: string) => {
     setArea(value);
-    refetchRecipes();
+    setTimeout(() => {
+      refetchRecipes();
+    }, 300);
   };
 
   const [category, setCategory] = useQueryState("category", {
@@ -31,7 +33,9 @@ export default function RecipeFilters({
 
   const handleCategoryChange = (value: string) => {
     setCategory(value);
-    refetchRecipes();
+    setTimeout(() => {
+      refetchRecipes();
+    }, 300);
   };
 
   const [ingredient, setIngredient] = useQueryState("ingredient", {
@@ -40,7 +44,9 @@ export default function RecipeFilters({
 
   const handleIngredientChange = (value: string) => {
     setIngredient(value);
-    refetchRecipes();
+    setTimeout(() => {
+      refetchRecipes();
+    }, 300);
   };
 
   return (
