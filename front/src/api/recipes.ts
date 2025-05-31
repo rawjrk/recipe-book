@@ -5,13 +5,13 @@ import { IRecipe, IRecipeInfo } from "./types";
 const { API_DOMAIN } = process.env;
 
 type IGetRecipesFilters = {
-  area: string;
-  category: string;
-  ingredient: string;
+  area?: string;
+  category?: string;
+  ingredient?: string;
 };
 
 export async function getRecipes(
-  filters: IGetRecipesFilters,
+  filters: IGetRecipesFilters
 ): Promise<IRecipe[]> {
   const query = stringifyQuery(filters);
   const res = await fetch(`${API_DOMAIN}/recipes?${query}`);
