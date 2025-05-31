@@ -23,14 +23,7 @@ export default function RecipeInfo({ data: recipe }: IRecipeInfoProps) {
           Area: <Link href={`/recipes?area=${recipe.area}`}>{recipe.area}</Link>
         </span>
       </div>
-      <h3 className="text-lg font-semibold mb-2">Ingredients</h3>
-      <ul className="list-disc list-inside mb-4">
-        {recipe.ingredients.map((ing, index) => (
-          <li key={index}>
-            {ing.name} — {ing.measure}
-          </li>
-        ))}
-      </ul>
+
       <h3 className="text-lg font-semibold mb-2">Instructions</h3>
       <div>
         {recipe.instructions.split("\n").map((line, index) => (
@@ -39,6 +32,16 @@ export default function RecipeInfo({ data: recipe }: IRecipeInfoProps) {
           </p>
         ))}
       </div>
+
+      <h3 className="text-lg font-semibold mb-2">Ingredients</h3>
+      <ul className="list-disc list-inside mb-4">
+        {recipe.ingredients.map((ing, index) => (
+          <li key={index}>
+            <Link href={`/recipes?ingredient=${ing.name}`}>{ing.name}</Link>
+            <span className="text-gray-400"> — {ing.measure}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
