@@ -12,3 +12,5 @@ export type IRecipe = {
   instructions: string;
   ingredients: IIngredient[];
 };
+
+export type IRecipeInfo = IRecipe & {};
