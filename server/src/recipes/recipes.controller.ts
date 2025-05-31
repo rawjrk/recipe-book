@@ -11,4 +11,12 @@ import { RecipesService } from './recipes.service';
 @Controller()
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
+
+  @Get('recipes')
+  async getRecipesList(@Query() query: any) {
+    // TODO: add proper query validation
+
+    const rawRecipes = await this.recipesService.fetchMany();
+    return this.recipesService.formatMany(rawRecipes);
+  }
 }
