@@ -19,12 +19,6 @@ export default function RecipeInfo({ data: recipe }: IRecipeInfoProps) {
       />
       <h2 className="text-2xl font-bold mb-2">{recipe.title}</h2>
       <div className="text-sm text-gray-400 mb-4">
-        <span className="mr-4">
-          Category:{" "}
-          <Link href={`/recipes?category=${recipe.category}`}>
-            {recipe.category}
-          </Link>
-        </span>
         <span>
           Area: <Link href={`/recipes?area=${recipe.area}`}>{recipe.area}</Link>
         </span>
