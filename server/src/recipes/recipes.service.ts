@@ -22,7 +22,7 @@ export class RecipesService {
   async fetchMany(options?: IFilterOptions) {
     // TODO: add options handling to apply filters
 
-    const query = stringifyQuery({ s: '' });
+    const query = stringifyQuery({ s: '' }) || 's=';
     const url = `${this.baseUrl}/search.php?${query}`;
 
     const res = await fetch(url);
