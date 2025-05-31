@@ -11,7 +11,7 @@ type IGetRecipesFilters = {
 };
 
 export async function getRecipes(
-  filters: IGetRecipesFilters
+  filters: IGetRecipesFilters,
 ): Promise<IRecipe[]> {
   const query = stringifyQuery(filters);
   const res = await fetch(`${API_DOMAIN}/recipes?${query}`);
