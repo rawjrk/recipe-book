@@ -6,6 +6,7 @@ import {
   ParseIntPipe,
   Query,
 } from '@nestjs/common';
+import { GetRecipesQueryDto } from './dto/get-recipes.dto';
 import { RecipesService } from './recipes.service';
 
 @Controller()
@@ -13,9 +14,7 @@ export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
   @Get('recipes')
-  async getRecipesList(@Query() query: any) {
-    // TODO: add proper query validation
-
+  async getRecipesList(@Query() query: GetRecipesQueryDto) {
     const rawRecipes = await this.recipesService.fetchMany();
     return this.recipesService.formatMany(rawRecipes);
   }
