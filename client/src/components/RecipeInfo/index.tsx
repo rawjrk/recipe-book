@@ -28,7 +28,7 @@ export default async function RecipeInfo({ data: recipe }: IRecipeInfoProps) {
       <main className="m-4 flex flex-col">
         <h2 className="text-3xl font-bold mb-2 self-center">{recipe.title}</h2>
         <div className="text-2x1 mb-2 self-center">
-          <span className="text-gray-400 ">Area:</span>{" "}
+          <span className="text-gray-600 dark:text-gray-400 ">Area:</span>{" "}
           <Link href={`/recipes?area=${recipe.area}`}>{recipe.area}</Link>
         </div>
 
@@ -37,7 +37,10 @@ export default async function RecipeInfo({ data: recipe }: IRecipeInfoProps) {
           {recipe.ingredients.map((ing, index) => (
             <li key={index}>
               <Link href={`/recipes?ingredient=${ing.name}`}>{ing.name}</Link>
-              <span className="text-gray-400"> — {ing.measure}</span>
+              <span className="text-gray-600 dark:text-gray-400">
+                {" "}
+                — {ing.measure}
+              </span>
             </li>
           ))}
         </ul>
@@ -53,7 +56,7 @@ export default async function RecipeInfo({ data: recipe }: IRecipeInfoProps) {
       </main>
 
       <Link href={`/recipes?category=${recipe.category}`}>
-        <aside className="px-4 py-2 m-4 border-1 border-gray-400 rounded-lg text-gray-400">
+        <aside className="px-4 py-2 m-4 border-1 border-gray-400 rounded-lg text-gray-600 dark:text-gray-400">
           <h3 className="text-lg font-semibold mb-2">
             Recipes from the same category
           </h3>

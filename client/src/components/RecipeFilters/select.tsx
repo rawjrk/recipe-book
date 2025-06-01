@@ -15,8 +15,13 @@ export default function FilterSelect({
   onChange,
   disabled,
 }: IFilterSelectProps) {
-  const bgColor = !disabled ? "bg-black" : "bg-gray-800";
-  const textColor = !disabled ? "text-white" : "text-gray-400";
+  const bgColor = !disabled
+    ? "bg-white dark:bg-black"
+    : "bg-gray-200 dark:bg-gray-800";
+
+  const textColor = !disabled
+    ? "text-black dark:text-white"
+    : "text-gray-600 dark:text-gray-400";
 
   return (
     <select
